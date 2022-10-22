@@ -1,22 +1,40 @@
 package com.usa.misiontic.masterclass3.entities;
 
+
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+
 
 @Entity
-@Table(name = "Client")
+@Table(name = "client")
 public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idClient;
-    private String name;
-    private Integer age;
-    private String password;
+
+    @Column(name = "email",length = 45)
     private String email;
 
+    @Column(name = "password",length = 45)
+    private String password;
+
+    @Column(name = "name",length = 250)
+    private String name;
+    private Integer age;
+
+    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "client")
+    @JsonIgnoreProperties("client")
+    public List <Message> messages;
+
+    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "client")
+    @JsonIgnoreProperties("client")
+    public List <Reservation> reservations;
 
     public Integer getIdClient() {
         return idClient;
@@ -24,6 +42,22 @@ public class Client implements Serializable {
 
     public void setIdClient(Integer idClient) {
         this.idClient = idClient;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -42,19 +76,19 @@ public class Client implements Serializable {
         this.age = age;
     }
 
-    public String getPassword() {
-        return password;
+    public List<Message> getMessages() {
+        return messages;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

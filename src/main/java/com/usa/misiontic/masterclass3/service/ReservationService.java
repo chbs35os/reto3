@@ -1,8 +1,5 @@
 package com.usa.misiontic.masterclass3.service;
-
-import com.usa.misiontic.masterclass3.entities.Product;
 import com.usa.misiontic.masterclass3.entities.Reservation;
-import com.usa.misiontic.masterclass3.repository.ProductRepository;
 import com.usa.misiontic.masterclass3.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +19,10 @@ public class ReservationService {
         return reservationRepository.getReservation(id);
     }
     public Reservation save(Reservation p) {
-        if (p.getId() == null) {
+        if (p.getIdReservation() == null) {
             return reservationRepository.save(p);
         } else {
-            Optional<Reservation> e = reservationRepository.getReservation(p.getId());
+            Optional<Reservation> e = reservationRepository.getReservation(p.getIdReservation());
             if(e.isPresent()) {
                 return p;
             }else {
@@ -34,8 +31,8 @@ public class ReservationService {
         }
     }
     public Reservation update(Reservation p){
-        if(p.getId()!=null){
-            Optional<Reservation> q =reservationRepository.getReservation(p.getId());
+        if(p.getIdReservation()!=null){
+            Optional<Reservation> q =reservationRepository.getReservation(p.getIdReservation());
             if (q.isPresent()){
 
                 reservationRepository.save(q.get());
@@ -48,13 +45,12 @@ public class ReservationService {
             return p;
         }
     }
-    public boolean delete(int id){
-        boolean flag=false;
-        Optional<Reservation>p=reservationRepository.getReservation(id);
-        if(p.isPresent()){
-            reservationRepository.delete(p.get());
-            flag=true;
-        }
-        return flag;
+    public boolean deleteReservation (int id){
+        Boolean d = getReservation(id).map(reservation -> {
+            reservationRepository.delete(reservation);
+            return true;
+        }).orElse(false);
+        return d;
     }
+
 }

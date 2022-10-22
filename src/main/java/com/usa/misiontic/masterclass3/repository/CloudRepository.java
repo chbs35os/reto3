@@ -1,9 +1,7 @@
 package com.usa.misiontic.masterclass3.repository;
 
-import com.usa.misiontic.masterclass3.entities.Category;
 import com.usa.misiontic.masterclass3.entities.Cloud;
-import com.usa.misiontic.masterclass3.repository.crudRepository.CategoryCrudRepository;
-import com.usa.misiontic.masterclass3.repository.crudRepository.CloudCrudRespository;
+import com.usa.misiontic.masterclass3.repository.crudRepository.CloudCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,17 +11,21 @@ import java.util.Optional;
 @Repository
 public class CloudRepository {
     @Autowired
-    private CloudCrudRespository cloudCrudRespository;
+    private CloudCrudRepository cloudCrudRepository;
     public List<Cloud> getAll(){
-        return (List<Cloud>) cloudCrudRespository.findAll();
+
+        return (List<Cloud>) cloudCrudRepository.findAll();
     }
     public Optional<Cloud> getCloud(int id){
-        return cloudCrudRespository.findById(id);
+
+        return cloudCrudRepository.findById(id);
     }
     public Cloud save(Cloud p){
-        return cloudCrudRespository.save(p);
+
+        return cloudCrudRepository.save(p);
     }
     public void delete(Cloud p){
-        cloudCrudRespository.delete(p);
+
+        cloudCrudRepository.delete(p);
     }
 }

@@ -1,7 +1,6 @@
 package com.usa.misiontic.masterclass3.service;
 
 import com.usa.misiontic.masterclass3.entities.Cloud;
-import com.usa.misiontic.masterclass3.entities.Product;
 import com.usa.misiontic.masterclass3.repository.CloudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +14,11 @@ public class CloudService {
     @Autowired
     private CloudRepository cloudRepository;
     public List<Cloud> getALL(){
+
         return cloudRepository.getAll();
     }
     public Optional<Cloud> getCloud(int id){
+
         return cloudRepository.getCloud(id);
     }
     public Cloud save(Cloud p) {
@@ -45,16 +46,10 @@ public class CloudService {
                 if(p.getBrand()!=null){
                     q.get().setBrand(p.getBrand());
                 }
-                if(p.getCategory()!=null){
-                    q.get().setCategory(p.getCategory());
-                }
-
-                if(p.getYear()!=null){
+               if(p.getYear()!=null){
                     q.get().setYear(p.getYear());
                 }
-                if(p.getCategory()!=null){
-                    q.get().setCategory(p.getCategory());
-                }
+
                 cloudRepository.save(q.get());
                 return q.get();
             }else{
@@ -65,13 +60,11 @@ public class CloudService {
             return p;
         }
     }
-    public boolean delete(int id){
-        boolean flag=false;
-        Optional<Cloud>p= cloudRepository.getCloud(id);
-        if(p.isPresent()){
-            cloudRepository.delete(p.get());
-            flag=true;
-        }
-        return flag;
+    public boolean deleteCloud (int id){
+        Boolean p = getCloud(id).map(cloud -> {
+            cloudRepository.delete(cloud);
+            return true;
+        }).orElse(false);
+        return p;
     }
 }

@@ -1,7 +1,6 @@
 package com.usa.misiontic.masterclass3.service;
 
 import com.usa.misiontic.masterclass3.entities.Client;
-import com.usa.misiontic.masterclass3.entities.Product;
 import com.usa.misiontic.masterclass3.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +14,11 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
     public List<Client> getALL(){
+
         return clientRepository.getAll();
     }
     public Optional<Client> getClient(int id){
+
         return clientRepository.getClient(id);
     }
     public Client save(Client p) {
@@ -50,13 +51,11 @@ public class ClientService {
             return p;
         }
     }
-    public boolean delete(int id){
-        boolean flag=false;
-        Optional<Client>p=clientRepository.getClient(id);
-        if(p.isPresent()){
-            clientRepository.delete(p.get());
-            flag=true;
-        }
-        return flag;
+    public boolean deleteClient (int id){
+        Boolean d = getClient(id).map(client -> {
+            clientRepository.delete(client);
+            return true;
+        }).orElse(false);
+        return d;
     }
 }

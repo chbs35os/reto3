@@ -1,7 +1,6 @@
 package com.usa.misiontic.masterclass3.repository;
 
 import com.usa.misiontic.masterclass3.entities.Reservation;
-import com.usa.misiontic.masterclass3.repository.crudRepository.ProductCrudRepository;
 import com.usa.misiontic.masterclass3.repository.crudRepository.ReservationCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,10 +22,12 @@ public class ReservationRepository {
     }
 
     public Reservation save(Reservation p){
+
         return reservationCrudRepository.save(p);
     }
 
     public void delete(Reservation p){
+
         reservationCrudRepository.delete(p);
     }
 }

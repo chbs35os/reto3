@@ -1,56 +1,92 @@
 package com.usa.misiontic.masterclass3.entities;
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.org.apache.xpath.internal.operations.String;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+
 @Entity
-@Table(name = "Reservation")
+@Table(name = "reservation")
 public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Date fechainicio;
-    private Date fechafin;
+    private Integer idReservation;
+    private Date startDate;
+    private Date devolutionDate;
+    private String status = "created";
 
+    @ManyToOne
+    @JoinColumn(name = "cloud_id")
+    @JsonIgnoreProperties({"reservations"})
+    public Cloud cloud;
 
-    @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("Reservation")
-    private Category category;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    @JsonIgnoreProperties({"messages","reservations"})
+    public Client client;
 
-    public Integer getId() {
-        return id;
+    @OneToOne
+    @JsonIgnoreProperties("reservations")
+    public Score score;
+
+    public Integer getIdReservation() {
+        return idReservation;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdReservation(Integer idReservation) {
+        this.idReservation = idReservation;
     }
 
-    public Date getFechainicio() {
-        return fechainicio;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setFechainicio(Date fechainicio) {
-        this.fechainicio = fechainicio;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getFechafin() {
-        return fechafin;
+    public Date getDevolutionDate() {
+        return devolutionDate;
     }
 
-    public void setFechafin(Date fechafin) {
-        this.fechafin = fechafin;
+    public void setDevolutionDate(Date devolutionDate) {
+        this.devolutionDate = devolutionDate;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Cloud getCloud() {
+        return cloud;
+    }
+
+    public void setCloud(Cloud cloud) {
+        this.cloud = cloud;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
     }
 }

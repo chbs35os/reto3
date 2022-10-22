@@ -1,27 +1,25 @@
 package com.usa.misiontic.masterclass3.service;
-
 import com.usa.misiontic.masterclass3.entities.Category;
-import com.usa.misiontic.masterclass3.entities.Product;
 import com.usa.misiontic.masterclass3.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CategoryService {
-
     @Autowired
     private CategoryRepository categoryRepository;
     public List<Category> getALL(){
+
         return categoryRepository.getAll();
     }
-    public Optional<Category> getProduct(int id){
+    public Optional<Category> getCategory(int id){
+
         return categoryRepository.getCategory(id);
     }
     public Category save(Category p) {
-        if (p.getId()==null) {
+        if (p.getId() == null) {
             return categoryRepository.save(p);
         } else {
             Optional<Category> e = categoryRepository.getCategory(p.getId());
@@ -50,13 +48,12 @@ public class CategoryService {
             return p;
         }
     }
-    public boolean delete(int id){
-        boolean flag=false;
-        Optional<Category>p= categoryRepository.getCategory(id);
-        if(p.isPresent()){
-            categoryRepository.delete(p.get());
-            flag=true;
-        }
-        return flag;
+    public boolean deleteCategory (int id){
+        Boolean d = getCategory(id).map(category -> {
+            categoryRepository.delete(category);
+            return true;
+        }).orElse(false);
+        return d;
     }
+
 }
