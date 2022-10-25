@@ -1,7 +1,7 @@
 package com.usa.misiontic.masterclass3.controller;
 
-import com.usa.misiontic.masterclass3.entities.Client;
-import com.usa.misiontic.masterclass3.service.ClientService;
+import com.usa.misiontic.masterclass3.entities.Admin;
+import com.usa.misiontic.masterclass3.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,42 +10,42 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/Client")
+@RequestMapping("/api/Admin")
 @CrossOrigin(origins = "*")
-public class ClientController {
+public class AdminController {
     @Autowired
-    private ClientService clientService;
+    private AdminService adminService;
 
     @GetMapping( "/all")
-    public List<Client> getAll(){
+    public List<Admin> getAll(){
 
-        return clientService.getALL();
+        return adminService.getALL();
     }
     @GetMapping("/{id}")
-    public Optional<Client> getClient(@PathVariable("id") int id) {
+    public Optional<Admin> getAdmin(@PathVariable("id") int id) {
 
-        return clientService.getClient(id);
+        return adminService.getAdmin(id);
     }
 
 
     @PostMapping( "/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save(@RequestBody Client p){
-        return clientService.save(p);
+    public Admin save(@RequestBody Admin p){
+        return adminService.save(p);
 
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client update(@RequestBody Client p){
+    public Admin update(@RequestBody Admin p){
 
-        return clientService.update(p);
+        return adminService.update(p);
     }
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id){
 
-        return clientService.deleteClient(id);
+        return adminService.deleteAdmin(id);
     }
 
 

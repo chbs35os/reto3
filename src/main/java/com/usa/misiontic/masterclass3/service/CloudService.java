@@ -22,10 +22,10 @@ public class CloudService {
         return cloudRepository.getCloud(id);
     }
     public Cloud save(Cloud p) {
-        if (p.getId() == null) {
+        if (p.getIdCLoud() == null) {
             return cloudRepository.save(p);
         } else {
-            Optional<Cloud> e = cloudRepository.getCloud(p.getId());
+            Optional<Cloud> e = cloudRepository.getCloud(p.getIdCLoud());
             if(e.isPresent()) {
                 return p;
             }else {
@@ -34,8 +34,8 @@ public class CloudService {
         }
     }
     public Cloud update(Cloud p){
-        if(p.getId()!=null){
-            Optional<Cloud> q = cloudRepository.getCloud(p.getId());
+        if(p.getIdCLoud()!=null){
+            Optional<Cloud> q = cloudRepository.getCloud(p.getIdCLoud());
             if (q.isPresent()){
                 if(p.getName()!=null){
                     q.get().setName(p.getName());
@@ -48,6 +48,9 @@ public class CloudService {
                 }
                if(p.getYear()!=null){
                     q.get().setYear(p.getYear());
+                }
+                if(p.getCategory()!=null){
+                    q.get().setCategory(p.getCategory());
                 }
 
                 cloudRepository.save(q.get());

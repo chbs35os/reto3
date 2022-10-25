@@ -37,7 +37,12 @@ public class ScoreService {
         if(p.getIdScore()!=null){
             Optional<Score> q = scoreRepository.getScore(p.getIdScore());
             if (q.isPresent()){
-
+                if(p.getMessageText()!=null){
+                    q.get().setMessageText(p.getMessageText());
+                }
+                if(p.getStars()!=null){
+                    q.get().setStars(p.getStars());
+                }
                 scoreRepository.save(q.get());
                 return q.get();
             }else{

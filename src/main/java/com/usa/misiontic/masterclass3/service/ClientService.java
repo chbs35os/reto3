@@ -37,9 +37,17 @@ public class ClientService {
         if(p.getIdClient()!=null){
             Optional<Client> q =clientRepository.getClient(p.getIdClient());
             if (q.isPresent()){
+                if(p.getEmail()!=null){
+                    q.get().setEmail(p.getEmail());
+                }
+                if(p.getPassword()!=null){
+                    q.get().setPassword(p.getPassword());
+                }
                 if(p.getName()!=null){
                     q.get().setName(p.getName());
-
+                }
+                if(p.getAge()!=null){
+                    q.get().setAge(p.getAge());
                 }
                 clientRepository.save(q.get());
                 return q.get();

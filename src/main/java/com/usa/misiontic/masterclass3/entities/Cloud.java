@@ -14,7 +14,7 @@ public class Cloud implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idCLoud;
     @Column(name = "name",length = 45)
     private String name;
     @Column(name = "brand",length = 45)
@@ -37,12 +37,20 @@ public class Cloud implements Serializable {
     @JsonIgnoreProperties({"cloud","messages"})
     private List<Reservation> reservations;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdCLoud() {
+        return idCLoud;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCLoud(Integer idCLoud) {
+        this.idCLoud = idCLoud;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBrand() {
@@ -59,14 +67,6 @@ public class Cloud implements Serializable {
 
     public void setYear(Integer year) {
         this.year = year;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {

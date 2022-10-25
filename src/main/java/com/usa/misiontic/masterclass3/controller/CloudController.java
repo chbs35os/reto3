@@ -36,11 +36,13 @@ public class CloudController {
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Cloud update(@RequestBody Cloud p){
+
         return cloudService.update(p);
     }
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id){
+
         return cloudService.deleteCloud(id);
     }
 

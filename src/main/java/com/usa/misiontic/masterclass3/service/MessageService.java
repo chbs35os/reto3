@@ -34,6 +34,9 @@ public class MessageService {
         if(p.getIdMessage()!=null){
             Optional<Message> q =messageRepository.getMessage(p.getIdMessage());
             if (q.isPresent()){
+                if(p.getMessageText()!=null){
+                    q.get().setMessageText(p.getMessageText());
+                }
 
                 messageRepository.save(q.get());
                 return q.get();
