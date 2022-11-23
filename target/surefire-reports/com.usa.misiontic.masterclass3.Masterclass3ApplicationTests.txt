@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.usa.misiontic.masterclass3.Masterclass3ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.547 s - in com.usa.misiontic.masterclass3.Masterclass3ApplicationTests
